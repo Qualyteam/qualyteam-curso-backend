@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ReceitasWebApi.Domain.Entities;
 
 namespace ReceitasWebApi.Infrastructure
 {
@@ -11,6 +12,8 @@ namespace ReceitasWebApi.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Receita>()
+                .HasKey(receita => receita.Id);
             base.OnModelCreating(modelBuilder);
         }
     }
