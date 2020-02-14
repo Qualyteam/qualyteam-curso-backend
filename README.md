@@ -1,4 +1,15 @@
-Dependencias WebApi
+# Qualyteam curso de introdução ao .NET Core
 
-https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer  
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.1.1
+## Build project
+```bash
+$ dotnet build
+```
+
+## Run API
+```bash
+$ cd ReceitasWebApi
+$ dotnet run
+```
+
+## Dependencies
+- https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer  
