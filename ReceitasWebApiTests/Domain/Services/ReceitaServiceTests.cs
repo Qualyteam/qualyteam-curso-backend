@@ -27,11 +27,7 @@ namespace ReceitasWebApiTests.Domain.Services
         [Fact]
         public void Insert_DeveSalvarUmaReceita()
         {
-            var novaReceita = new Receita()
-            {
-                Titulo = "Feijoada"
-            };
-
+            var novaReceita = new Receita(null);
             _service.Insert(novaReceita);
 
             _context.Receitas
@@ -40,6 +36,38 @@ namespace ReceitasWebApiTests.Domain.Services
 
             var receitaDoBanco = _context.Receitas.FirstOrDefault();
             receitaDoBanco.Titulo.Should().Be(novaReceita.Titulo);
+        }
+
+        [Fact]
+        public async void GetAll_DeveRetornarTodasAsReceitas()
+        {
+            var feijoada = new Receita("Feijoada")
+            {
+                ImagemUrl = "ImagemUrl",
+                Ingredientes = "Ingredientes",
+                Descricao = "Descricao",
+                MetodoDePreparo = "MetodoDePreparo",
+            };
+
+            var burguer = new Receita("Burguer")
+            {
+                ImagemUrl = "ImagemUrl",
+                Ingredientes = "Ingredientes",
+                Descricao = "Descricao",
+                MetodoDePreparo = "MetodoDePreparo",
+            };
+
+            _context.Receitas.AddRange(feijoada, burguer);
+            _context.SaveChanges();
+
+            var retorno = await _service.GetAll();
+            retorno.Should().HaveCount(2);
+            var feijoadaDoRetorno = retorno
+                .FirstOrDefault(receita =>
+                receita.Title == feijoada.Titulo
+            );
+            feijoadaDoRetorno.Should().NotBeNull();
+
         }
     }
 }

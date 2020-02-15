@@ -50,6 +50,7 @@ namespace ReceitasWebApi
             {
                 endpoints.MapControllers();
             });
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         }
     }
 }
