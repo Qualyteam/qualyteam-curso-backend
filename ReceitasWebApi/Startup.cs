@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReceitasWebApi.Domain.Services;
 using ReceitasWebApi.Infrastructure;
+using ReceitasWebApi.Services;
 
 namespace ReceitasWebApi
 {
@@ -27,6 +29,7 @@ namespace ReceitasWebApi
                         Configuration.GetConnectionString("Database")
                     )
                 );
+            services.AddScoped<IReceitaService, ReceitaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
